@@ -12,7 +12,7 @@
 
     <div id="sidebar">
         <img src="/img/user.jpg" alt="headshot" class="headshot" />
-        Andrey Chernikov
+        <span id="username">Andrey Chernikov</span>
 
         <ul class="menu">
             <li class="active"><a href="#">Home</a></li>
@@ -22,16 +22,19 @@
     </div>
     <div id="wrapper">
         <div id="main">
+            <div>
+                <button id="sidebarToggle">Hide Sidebar</button>
+            </div>
             <h1>The World</h1>
             <p>This will be a fun website soon!</p>
             <form>
                 <div>
                     <label>Date</label>
-                    <input type="" value="" />
+                    <input />
                 </div>
                 <div>
                     <label>Location</label>
-                    <input type="" value="" />
+                    <input />
                 </div>
                 <div>
                     <input type="submit" value="Add" />
@@ -42,6 +45,8 @@
             &copy; 2016 The World ltd.
         </div>
     </div>
+    <script type="text/javascript" src="/lib/jquery/dist/jquery.min.js"></script>
+    <script src="js/site.js"></script>
 </body>
 
 </html>
