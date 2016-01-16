@@ -1,5 +1,8 @@
 ﻿{
-    "AppSettings": {
-        "SiteEmailAddress" :  "chernikov@gmail.com"
-    }	
+  "AppSettings": {
+    "SiteEmailAddress": "chernikov@gmail.com"
+  },
+  "Data": {
+    "WorldContetConnection": "Server=(localdb)\\ProjectsV12;Database=TheWorld.Db;Trusted_Connection=true;MultipleActiveResultSets=true;"
+  }
 }

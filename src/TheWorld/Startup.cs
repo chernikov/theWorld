@@ -9,6 +9,8 @@ using Microsoft.Extensions.DependencyInjection;
 using TheWorld.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.PlatformAbstractions;
+using TheWorld.Models;
+using Microsoft.Extensions.Logging;
 
 namespace TheWorld
 {
@@ -31,18 +33,26 @@ namespace TheWorld
         {
             services.AddMvc();
             services.AddScoped<IMailService, DebugMailService>();
-            //if (env.IsDevelopment()) {
-            //    services.AddScoped<IMailService, DebugMailService>();
-            //}
-            //else
-            //{
-            //    services.AddScoped<IMailService, RealMailService>();
-            //}
+            services.AddLogging();
+            services.AddEntityFramework()
+                .AddSqlServer()
+                .AddDbContext<WorldContext>();
+
+            services.AddTransient<WorldContextSeedData>();
+            services.AddScoped<IWorldRepository, WorldRepository>();
+
+#if DEBUG
+            services.AddScoped<IMailService, DebugMailService>();
+#else
+                services.AddScoped<IMailService, RealMailService>();
+#endif            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, WorldContextSeedData seeder, ILoggerFactory loggerFactory)
         {
+            loggerFactory.AddDebug(LogLevel.Warning);
+
             app.UseStaticFiles();
 
             app.UseMvc(config =>
@@ -57,16 +67,8 @@ namespace TheWorld
                 });
             });
 
-            if (env.IsDevelopment())
-            {
-                app.UseBrowserLink();
-                app.UseDeveloperExceptionPage();
-                app.UseDatabaseErrorPage();
-            }
-            else
-            {
-                app.UseExceptionHandler("/Home/Error");
-            }
+            seeder.EnsureSeedData();
+
         }
 
         // Entry point for the application.
