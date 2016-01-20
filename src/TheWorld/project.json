@@ -18,14 +18,22 @@
     "Microsoft.AspNet.Tooling.Razor": "1.0.0-rc1-final",
     "EntityFramework.MicrosoftSqlServer": "7.0.0-rc1-final",
     "EntityFramework.Commands": "7.0.0-rc1-final",
-    "Microsoft.Extensions.Logging.Debug": "1.0.0-rc1-final"
+    "Microsoft.Extensions.Logging.Debug": "1.0.0-rc1-final",
+    "AutoMapper": "4.1.1",
+    "Newtonsoft.Json": "6.0.6",
+    "System.Net.Http": "4.0.1-beta-23516"
   },
   "exclude": [
     "wwwroot",
     "node_modules"
   ],
   "frameworks": {
-    "dnx451": { },
+    "dnx451": {
+      "dependencies": {
+        "Microsoft.Net.Http": "2.2.22",
+        "System.Net.Http": "4.0.1-beta-23516"
+      }
+    },
     "dnxcore50": { }
   },
   "publishExclude": [
