@@ -21,11 +21,14 @@
     "Microsoft.Extensions.Logging.Debug": "1.0.0-rc1-final",
     "AutoMapper": "4.1.1",
     "Newtonsoft.Json": "6.0.6",
-    "System.Net.Http": "4.0.1-beta-23516"
+    "System.Net.Http": "4.0.1-beta-23516",
+    "Microsoft.AspNet.Identity.EntityFramework": "3.0.0-rc1-final",
+    "Microsoft.AspNet.Authentication.Cookies": "1.0.0-rc1-final"
   },
   "exclude": [
     "wwwroot",
-    "node_modules"
+    "node_modules",
+    "bower_components"
   ],
   "frameworks": {
     "dnx451": {

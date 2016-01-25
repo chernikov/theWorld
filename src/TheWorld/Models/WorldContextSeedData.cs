@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,14 +9,25 @@ namespace TheWorld.Models
     public class WorldContextSeedData
     {
         private WorldContext _context;
+        private UserManager<WorldUser> _userManager;
 
-        public WorldContextSeedData(WorldContext context)
+        public WorldContextSeedData(WorldContext context, UserManager<WorldUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
-        public void EnsureSeedData()
+        public async Task EnsureSeedData()
         {
+            if (await _userManager.FindByEmailAsync("chernikov@theworld.com") == null)
+            {
+                var newUser = new WorldUser()
+                {
+                    UserName = "chernikov",
+                    Email = "chernikov@theworld.com"
+                };
+                await _userManager.CreateAsync(newUser, "Pa$$w0rd!");
+            }
             if (!_context.Trips.Any())
             {
                 //Add new Data
