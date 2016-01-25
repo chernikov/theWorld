@@ -14,6 +14,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.AspNet.Http;
 using Microsoft.AspNet.Authentication.Cookies;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Mvc;
 
 namespace TheWorld
 {
@@ -27,6 +28,7 @@ namespace TheWorld
                 .AddJsonFile($"{appEnv.ApplicationBasePath}\\config.json")
                 .AddEnvironmentVariables();
 
+
             Configuration = builder.Build();
         }
 
@@ -34,7 +36,11 @@ namespace TheWorld
         // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc()
+            services.AddMvc(config => {
+#if !DEBUG
+               config.Filters.Add(new RequireHttpsAttribute());
+#endif
+            })
                 .AddJsonOptions(opt =>
                 {
                     opt.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
@@ -61,7 +67,7 @@ namespace TheWorld
             services.AddScoped<IMailService, DebugMailService>();
 #else
                 services.AddScoped<IMailService, RealMailService>();
-#endif            
+#endif
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -91,16 +97,15 @@ namespace TheWorld
                         action = "Index"
                     });
             });
-            app.UseCookieAuthentication(options =>
-            {
-                options.LoginPath = new PathString("/Admin/Login");
-                options.LogoutPath = new PathString("/Admin/LogOff");
-            });
-    await seeder.EnsureSeedData();
+            //app.UseCookieAuthentication(options =>
+            //{
+            //    options.LoginPath = new PathString("/Admin/Login");
+            //    options.LogoutPath = new PathString("/Admin/LogOff");
+            //});
+            await seeder.EnsureSeedData();
+        }
 
+        // Entry point for the application.
+        public static void Main(string[] args) => WebApplication.Run<Startup>(args);
     }
-
-    // Entry point for the application.
-    public static void Main(string[] args) => WebApplication.Run<Startup>(args);
-}
 }

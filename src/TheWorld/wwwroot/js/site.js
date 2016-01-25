@@ -1,7 +1,4 @@
 ﻿(function (){
-    var ele = $("#username");
-    ele.text("Sam Jones");
-
     var main = $("#main");
 
     main.on("mouseenter", function () {
