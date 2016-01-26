@@ -4,38 +4,43 @@ using Microsoft.Data.Entity.Infrastructure;
 using Microsoft.Data.Entity.Metadata;
 using Microsoft.Data.Entity.Migrations;
 using TheWorld.Models;
+using Microsoft.Data.Entity.SqlServer.Metadata;
 
 namespace TheWorld.Migrations
 {
     [DbContext(typeof(WorldContext))]
-    [Migration("20160121201607_IdentityEntities")]
     partial class IdentityEntities
     {
+        public override string Id
+        {
+            get { return "20150914064108_IdentityEntities"; }
+        }
+
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.0-rc1-16348")
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .Annotation("ProductVersion", "7.0.0-beta7-15540")
+                .Annotation("SqlServer:ValueGenerationStrategy", SqlServerIdentityStrategy.IdentityColumn);
 
             modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityRole", b =>
                 {
                     b.Property<string>("Id");
 
                     b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken();
+                        .ConcurrencyToken();
 
                     b.Property<string>("Name")
-                        .HasAnnotation("MaxLength", 256);
+                        .Annotation("MaxLength", 256);
 
                     b.Property<string>("NormalizedName")
-                        .HasAnnotation("MaxLength", 256);
+                        .Annotation("MaxLength", 256);
 
-                    b.HasKey("Id");
+                    b.Key("Id");
 
-                    b.HasIndex("NormalizedName")
-                        .HasAnnotation("Relational:Name", "RoleNameIndex");
+                    b.Index("NormalizedName")
+                        .Annotation("Relational:Name", "RoleNameIndex");
 
-                    b.HasAnnotation("Relational:TableName", "AspNetRoles");
+                    b.Annotation("Relational:TableName", "AspNetRoles");
                 });
 
             modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityRoleClaim<string>", b =>
@@ -47,12 +52,11 @@ namespace TheWorld.Migrations
 
                     b.Property<string>("ClaimValue");
 
-                    b.Property<string>("RoleId")
-                        .IsRequired();
+                    b.Property<string>("RoleId");
 
-                    b.HasKey("Id");
+                    b.Key("Id");
 
-                    b.HasAnnotation("Relational:TableName", "AspNetRoleClaims");
+                    b.Annotation("Relational:TableName", "AspNetRoleClaims");
                 });
 
             modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityUserClaim<string>", b =>
@@ -64,12 +68,11 @@ namespace TheWorld.Migrations
 
                     b.Property<string>("ClaimValue");
 
-                    b.Property<string>("UserId")
-                        .IsRequired();
+                    b.Property<string>("UserId");
 
-                    b.HasKey("Id");
+                    b.Key("Id");
 
-                    b.HasAnnotation("Relational:TableName", "AspNetUserClaims");
+                    b.Annotation("Relational:TableName", "AspNetUserClaims");
                 });
 
             modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityUserLogin<string>", b =>
@@ -80,12 +83,11 @@ namespace TheWorld.Migrations
 
                     b.Property<string>("ProviderDisplayName");
 
-                    b.Property<string>("UserId")
-                        .IsRequired();
+                    b.Property<string>("UserId");
 
-                    b.HasKey("LoginProvider", "ProviderKey");
+                    b.Key("LoginProvider", "ProviderKey");
 
-                    b.HasAnnotation("Relational:TableName", "AspNetUserLogins");
+                    b.Annotation("Relational:TableName", "AspNetUserLogins");
                 });
 
             modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityUserRole<string>", b =>
@@ -94,9 +96,9 @@ namespace TheWorld.Migrations
 
                     b.Property<string>("RoleId");
 
-                    b.HasKey("UserId", "RoleId");
+                    b.Key("UserId", "RoleId");
 
-                    b.HasAnnotation("Relational:TableName", "AspNetUserRoles");
+                    b.Annotation("Relational:TableName", "AspNetUserRoles");
                 });
 
             modelBuilder.Entity("TheWorld.Models.Stop", b =>
@@ -116,7 +118,7 @@ namespace TheWorld.Migrations
 
                     b.Property<int?>("TripId");
 
-                    b.HasKey("Id");
+                    b.Key("Id");
                 });
 
             modelBuilder.Entity("TheWorld.Models.Trip", b =>
@@ -130,7 +132,7 @@ namespace TheWorld.Migrations
 
                     b.Property<string>("UserName");
 
-                    b.HasKey("Id");
+                    b.Key("Id");
                 });
 
             modelBuilder.Entity("TheWorld.Models.WorldUser", b =>
@@ -140,10 +142,10 @@ namespace TheWorld.Migrations
                     b.Property<int>("AccessFailedCount");
 
                     b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken();
+                        .ConcurrencyToken();
 
                     b.Property<string>("Email")
-                        .HasAnnotation("MaxLength", 256);
+                        .Annotation("MaxLength", 256);
 
                     b.Property<bool>("EmailConfirmed");
 
@@ -154,10 +156,10 @@ namespace TheWorld.Migrations
                     b.Property<DateTimeOffset?>("LockoutEnd");
 
                     b.Property<string>("NormalizedEmail")
-                        .HasAnnotation("MaxLength", 256);
+                        .Annotation("MaxLength", 256);
 
                     b.Property<string>("NormalizedUserName")
-                        .HasAnnotation("MaxLength", 256);
+                        .Annotation("MaxLength", 256);
 
                     b.Property<string>("PasswordHash");
 
@@ -170,56 +172,56 @@ namespace TheWorld.Migrations
                     b.Property<bool>("TwoFactorEnabled");
 
                     b.Property<string>("UserName")
-                        .HasAnnotation("MaxLength", 256);
+                        .Annotation("MaxLength", 256);
 
-                    b.HasKey("Id");
+                    b.Key("Id");
 
-                    b.HasIndex("NormalizedEmail")
-                        .HasAnnotation("Relational:Name", "EmailIndex");
+                    b.Index("NormalizedEmail")
+                        .Annotation("Relational:Name", "EmailIndex");
 
-                    b.HasIndex("NormalizedUserName")
-                        .HasAnnotation("Relational:Name", "UserNameIndex");
+                    b.Index("NormalizedUserName")
+                        .Annotation("Relational:Name", "UserNameIndex");
 
-                    b.HasAnnotation("Relational:TableName", "AspNetUsers");
+                    b.Annotation("Relational:TableName", "AspNetUsers");
                 });
 
             modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityRoleClaim<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNet.Identity.EntityFramework.IdentityRole")
-                        .WithMany()
-                        .HasForeignKey("RoleId");
+                    b.Reference("Microsoft.AspNet.Identity.EntityFramework.IdentityRole")
+                        .InverseCollection()
+                        .ForeignKey("RoleId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("TheWorld.Models.WorldUser")
-                        .WithMany()
-                        .HasForeignKey("UserId");
+                    b.Reference("TheWorld.Models.WorldUser")
+                        .InverseCollection()
+                        .ForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("TheWorld.Models.WorldUser")
-                        .WithMany()
-                        .HasForeignKey("UserId");
+                    b.Reference("TheWorld.Models.WorldUser")
+                        .InverseCollection()
+                        .ForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityUserRole<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNet.Identity.EntityFramework.IdentityRole")
-                        .WithMany()
-                        .HasForeignKey("RoleId");
+                    b.Reference("Microsoft.AspNet.Identity.EntityFramework.IdentityRole")
+                        .InverseCollection()
+                        .ForeignKey("RoleId");
 
-                    b.HasOne("TheWorld.Models.WorldUser")
-                        .WithMany()
-                        .HasForeignKey("UserId");
+                    b.Reference("TheWorld.Models.WorldUser")
+                        .InverseCollection()
+                        .ForeignKey("UserId");
                 });
 
             modelBuilder.Entity("TheWorld.Models.Stop", b =>
                 {
-                    b.HasOne("TheWorld.Models.Trip")
-                        .WithMany()
-                        .HasForeignKey("TripId");
+                    b.Reference("TheWorld.Models.Trip")
+                        .InverseCollection()
+                        .ForeignKey("TripId");
                 });
         }
     }

@@ -2,19 +2,14 @@
 // Bootswatch
 // -----------------------------------------------------
 
-@web-font-path: "https://fonts.googleapis.com/css?family=Lato:300,400,700";
-
-.web-font(@path) {
-  @import url("@{path}");
-}
-.web-font(@web-font-path);
+@import url("https://fonts.googleapis.com/css?family=Lato:300,400,700");
 
 // Navbar =====================================================================
 
 .navbar {
   .box-shadow(none);
   border: none;
-  font-size: @font-size-small;
+  font-size: 12px;
 
   &-default {
 
@@ -37,6 +32,8 @@
 
 .btn {
 
+  font-weight: 300;
+
   &-default {
     &:hover {
       background-color: darken(@btn-default-bg, 3%);
@@ -45,11 +42,15 @@
 
   &-sm,
   &-xs {
-    font-size: @font-size-small;
+    font-size: 12px;
   }
 }
 
 // Typography =================================================================
+
+body {
+  font-weight: 300;
+}
 
 .text-primary,
 .text-primary:hover {
@@ -87,7 +88,8 @@
   .box-shadow(none);
 
   > li > a {
-    font-size: @font-size-small;
+    font-size: 12px;
+    font-weight: 300;
   }
 }
 
@@ -96,14 +98,14 @@
 }
 
 .dropdown-header {
-  font-size: @font-size-small;
+  font-size: 12px;
 }
 
 // Tables =====================================================================
 
 table,
 .table {
-  font-size: @font-size-small;
+  font-size: 12px;
 
   a:not(.btn) {
     color: #fff;
@@ -139,7 +141,8 @@ label,
 .radio label,
 .checkbox label,
 .help-block {
-  font-size: @font-size-small;
+  font-size: 12px;
+  font-weight: 300;
 }
 
 .input-addon,
@@ -248,6 +251,10 @@ label,
 }
 
 // Indicators =================================================================
+
+.label {
+  font-weight: 300;
+}
 
 .alert {
   color: #fff;

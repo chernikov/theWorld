@@ -4,18 +4,23 @@ using Microsoft.Data.Entity.Infrastructure;
 using Microsoft.Data.Entity.Metadata;
 using Microsoft.Data.Entity.Migrations;
 using TheWorld.Models;
+using Microsoft.Data.Entity.SqlServer.Metadata;
 
 namespace TheWorld.Migrations
 {
     [DbContext(typeof(WorldContext))]
-    [Migration("20160116200745_InitialDatabase")]
     partial class InitialDatabase
     {
+        public override string Id
+        {
+            get { return "20150908064505_InitialDatabase"; }
+        }
+
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.0-rc1-16348")
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .Annotation("ProductVersion", "7.0.0-beta7-15540")
+                .Annotation("SqlServer:ValueGenerationStrategy", SqlServerIdentityStrategy.IdentityColumn);
 
             modelBuilder.Entity("TheWorld.Models.Stop", b =>
                 {
@@ -34,7 +39,7 @@ namespace TheWorld.Migrations
 
                     b.Property<int?>("TripId");
 
-                    b.HasKey("Id");
+                    b.Key("Id");
                 });
 
             modelBuilder.Entity("TheWorld.Models.Trip", b =>
@@ -48,14 +53,14 @@ namespace TheWorld.Migrations
 
                     b.Property<string>("UserName");
 
-                    b.HasKey("Id");
+                    b.Key("Id");
                 });
 
             modelBuilder.Entity("TheWorld.Models.Stop", b =>
                 {
-                    b.HasOne("TheWorld.Models.Trip")
-                        .WithMany()
-                        .HasForeignKey("TripId");
+                    b.Reference("TheWorld.Models.Trip")
+                        .InverseCollection()
+                        .ForeignKey("TripId");
                 });
         }
     }

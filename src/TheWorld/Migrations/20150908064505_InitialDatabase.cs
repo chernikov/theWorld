@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Microsoft.Data.Entity.Migrations;
-using Microsoft.Data.Entity.Metadata;
+using Microsoft.Data.Entity.SqlServer.Metadata;
 
 namespace TheWorld.Migrations
 {
@@ -13,11 +13,11 @@ namespace TheWorld.Migrations
                 name: "Trip",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Created = table.Column<DateTime>(nullable: false),
-                    Name = table.Column<string>(nullable: true),
-                    UserName = table.Column<string>(nullable: true)
+                    Id = table.Column<int>(isNullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerIdentityStrategy.IdentityColumn),
+                    Created = table.Column<DateTime>(isNullable: false),
+                    Name = table.Column<string>(isNullable: true),
+                    UserName = table.Column<string>(isNullable: true)
                 },
                 constraints: table =>
                 {
@@ -27,14 +27,14 @@ namespace TheWorld.Migrations
                 name: "Stop",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Arrival = table.Column<DateTime>(nullable: false),
-                    Latitude = table.Column<double>(nullable: false),
-                    Longitude = table.Column<double>(nullable: false),
-                    Name = table.Column<string>(nullable: true),
-                    Order = table.Column<int>(nullable: false),
-                    TripId = table.Column<int>(nullable: true)
+                    Id = table.Column<int>(isNullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerIdentityStrategy.IdentityColumn),
+                    Arrival = table.Column<DateTime>(isNullable: false),
+                    Latitude = table.Column<double>(isNullable: false),
+                    Longitude = table.Column<double>(isNullable: false),
+                    Name = table.Column<string>(isNullable: true),
+                    Order = table.Column<int>(isNullable: false),
+                    TripId = table.Column<int>(isNullable: true)
                 },
                 constraints: table =>
                 {
@@ -43,8 +43,7 @@ namespace TheWorld.Migrations
                         name: "FK_Stop_Trip_TripId",
                         column: x => x.TripId,
                         principalTable: "Trip",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "Id");
                 });
         }
 

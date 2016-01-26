@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Microsoft.Data.Entity.Migrations;
-using Microsoft.Data.Entity.Metadata;
+using Microsoft.Data.Entity.SqlServer.Metadata;
 
 namespace TheWorld.Migrations
 {
@@ -13,10 +13,10 @@ namespace TheWorld.Migrations
                 name: "AspNetRoles",
                 columns: table => new
                 {
-                    Id = table.Column<string>(nullable: false),
-                    ConcurrencyStamp = table.Column<string>(nullable: true),
-                    Name = table.Column<string>(nullable: true),
-                    NormalizedName = table.Column<string>(nullable: true)
+                    Id = table.Column<string>(isNullable: false),
+                    ConcurrencyStamp = table.Column<string>(isNullable: true),
+                    Name = table.Column<string>(isNullable: true),
+                    NormalizedName = table.Column<string>(isNullable: true)
                 },
                 constraints: table =>
                 {
@@ -26,22 +26,22 @@ namespace TheWorld.Migrations
                 name: "AspNetUsers",
                 columns: table => new
                 {
-                    Id = table.Column<string>(nullable: false),
-                    AccessFailedCount = table.Column<int>(nullable: false),
-                    ConcurrencyStamp = table.Column<string>(nullable: true),
-                    Email = table.Column<string>(nullable: true),
-                    EmailConfirmed = table.Column<bool>(nullable: false),
-                    FirstTrip = table.Column<DateTime>(nullable: false),
-                    LockoutEnabled = table.Column<bool>(nullable: false),
-                    LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
-                    NormalizedEmail = table.Column<string>(nullable: true),
-                    NormalizedUserName = table.Column<string>(nullable: true),
-                    PasswordHash = table.Column<string>(nullable: true),
-                    PhoneNumber = table.Column<string>(nullable: true),
-                    PhoneNumberConfirmed = table.Column<bool>(nullable: false),
-                    SecurityStamp = table.Column<string>(nullable: true),
-                    TwoFactorEnabled = table.Column<bool>(nullable: false),
-                    UserName = table.Column<string>(nullable: true)
+                    Id = table.Column<string>(isNullable: false),
+                    AccessFailedCount = table.Column<int>(isNullable: false),
+                    ConcurrencyStamp = table.Column<string>(isNullable: true),
+                    Email = table.Column<string>(isNullable: true),
+                    EmailConfirmed = table.Column<bool>(isNullable: false),
+                    FirstTrip = table.Column<DateTime>(isNullable: false),
+                    LockoutEnabled = table.Column<bool>(isNullable: false),
+                    LockoutEnd = table.Column<DateTimeOffset>(isNullable: true),
+                    NormalizedEmail = table.Column<string>(isNullable: true),
+                    NormalizedUserName = table.Column<string>(isNullable: true),
+                    PasswordHash = table.Column<string>(isNullable: true),
+                    PhoneNumber = table.Column<string>(isNullable: true),
+                    PhoneNumberConfirmed = table.Column<bool>(isNullable: false),
+                    SecurityStamp = table.Column<string>(isNullable: true),
+                    TwoFactorEnabled = table.Column<bool>(isNullable: false),
+                    UserName = table.Column<string>(isNullable: true)
                 },
                 constraints: table =>
                 {
@@ -51,11 +51,11 @@ namespace TheWorld.Migrations
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    ClaimType = table.Column<string>(nullable: true),
-                    ClaimValue = table.Column<string>(nullable: true),
-                    RoleId = table.Column<string>(nullable: false)
+                    Id = table.Column<int>(isNullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerIdentityStrategy.IdentityColumn),
+                    ClaimType = table.Column<string>(isNullable: true),
+                    ClaimValue = table.Column<string>(isNullable: true),
+                    RoleId = table.Column<string>(isNullable: true)
                 },
                 constraints: table =>
                 {
@@ -64,18 +64,17 @@ namespace TheWorld.Migrations
                         name: "FK_IdentityRoleClaim<string>_IdentityRole_RoleId",
                         column: x => x.RoleId,
                         principalTable: "AspNetRoles",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
             migrationBuilder.CreateTable(
                 name: "AspNetUserClaims",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    ClaimType = table.Column<string>(nullable: true),
-                    ClaimValue = table.Column<string>(nullable: true),
-                    UserId = table.Column<string>(nullable: false)
+                    Id = table.Column<int>(isNullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerIdentityStrategy.IdentityColumn),
+                    ClaimType = table.Column<string>(isNullable: true),
+                    ClaimValue = table.Column<string>(isNullable: true),
+                    UserId = table.Column<string>(isNullable: true)
                 },
                 constraints: table =>
                 {
@@ -84,17 +83,16 @@ namespace TheWorld.Migrations
                         name: "FK_IdentityUserClaim<string>_WorldUser_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
             migrationBuilder.CreateTable(
                 name: "AspNetUserLogins",
                 columns: table => new
                 {
-                    LoginProvider = table.Column<string>(nullable: false),
-                    ProviderKey = table.Column<string>(nullable: false),
-                    ProviderDisplayName = table.Column<string>(nullable: true),
-                    UserId = table.Column<string>(nullable: false)
+                    LoginProvider = table.Column<string>(isNullable: false),
+                    ProviderKey = table.Column<string>(isNullable: false),
+                    ProviderDisplayName = table.Column<string>(isNullable: true),
+                    UserId = table.Column<string>(isNullable: true)
                 },
                 constraints: table =>
                 {
@@ -103,15 +101,14 @@ namespace TheWorld.Migrations
                         name: "FK_IdentityUserLogin<string>_WorldUser_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
             migrationBuilder.CreateTable(
                 name: "AspNetUserRoles",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(nullable: false),
-                    RoleId = table.Column<string>(nullable: false)
+                    UserId = table.Column<string>(isNullable: false),
+                    RoleId = table.Column<string>(isNullable: false)
                 },
                 constraints: table =>
                 {
@@ -120,14 +117,12 @@ namespace TheWorld.Migrations
                         name: "FK_IdentityUserRole<string>_IdentityRole_RoleId",
                         column: x => x.RoleId,
                         principalTable: "AspNetRoles",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_IdentityUserRole<string>_WorldUser_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
             migrationBuilder.CreateIndex(
                 name: "RoleNameIndex",

@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 
 namespace TheWorld.ViewModels
 {
-    public class TripViewModel
-    {
-        public int Id { get; set; }
+  public class TripViewModel
+  {
+    public int Id { get; set; }
 
+    [Required]
+    [StringLength(255, MinimumLength = 5)]
+    public string Name { get; set; }
 
-        [Required]
-        [StringLength(255, MinimumLength = 5)]
-        public string Name { get; set; }
+    public DateTime Created { get; set; } = DateTime.UtcNow;
 
-        public DateTime Created { get; set; } = DateTime.UtcNow;
+    public IEnumerable<StopViewModel> Stops { get; set; }
 
-        public IEnumerable<StopViewModel> Stops { get; set; }
-    }
+  }
 }
