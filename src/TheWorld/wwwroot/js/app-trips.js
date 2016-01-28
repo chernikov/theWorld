@@ -11,6 +11,12 @@
             controllerAs: "vm",
             templateUrl : "/views/tripsView.html"
         });
+
+        $routeProvider.when("/editor/:tripName", {
+            controller: "tripEditorController",
+            controllerAs: "vm",
+            templateUrl: "/views/tripsEditorView.html"
+        });
         
         $routeProvider.otherwise({ redirectTo : "/" })
     });
